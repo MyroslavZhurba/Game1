@@ -42,19 +42,5 @@ namespace tetris99
             }
         }
 
-        /* static void Fall(out Figure  f, FigureGenerator generator)
-         {
-             f = generator.GetNewFigure();
-             f.Draw();
-             for(int i =0;i<15;++i)
-             {
-                 f.Hide();
-                 f.Move(Direction.Down);
-                 f.Draw();
-                 Thread.Sleep(200);
-             }
-         }*/
-
-
     }
 }
