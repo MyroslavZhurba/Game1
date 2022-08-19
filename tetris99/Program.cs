@@ -5,41 +5,54 @@ namespace tetris99
 {
     class Program
     {
+        static FigureGenerator generator;
         static void Main(string[] args)
         {
-            Console.SetWindowSize(40, 30);
-            Console.SetBufferSize(40, 30);
+            Console.SetWindowSize(Field.Height, Field.Width);
+            Console.SetBufferSize(Field.Height, Field.Width);
 
-            FigureGenerator generator = new FigureGenerator(20,0,'*');
-            Figure cur_f = generator.GetNewFigure();
-
+            generator = new FigureGenerator(20,0,'*');
+            Figure curF = generator.GetNewFigure();
+           
             while (true)
             {
                 if (Console.KeyAvailable)
                 {
                     var key = Console.ReadKey();
-                    HandleKey(cur_f, key);
+                    var result = HandleKey(curF, key);
+                    ProcessResult(ref curF, result);
                 }
+               
             }
+            
             
             
             Console.ReadLine();
         }
 
-        private static void HandleKey(Figure cur_f, ConsoleKeyInfo key)
+        private static void ProcessResult(ref Figure  curF, Result result)
+        {
+           if(result == Result.DOWN_BORDER_STOP || result == Result.HEAP_STOP)
+            {
+                Field.AddFigure(curF);
+                curF= generator.GetNewFigure();
+           }
+        }
+
+        private static Result HandleKey(Figure cur_f, ConsoleKeyInfo key)
         {
             switch (key.Key)
             {
                 case ConsoleKey.LeftArrow:
-                    cur_f.TryMove(Direction.Left);
-                    break;
+                    return cur_f.TryMove(Direction.Left);
                 case ConsoleKey.RightArrow:
-                    cur_f.TryMove(Direction.Right);
-                    break;
+                    return cur_f.TryMove(Direction.Right);
                 case ConsoleKey.DownArrow:
-                    cur_f.TryMove(Direction.Down);
-                    break;
+                    return cur_f.TryMove(Direction.Down);
+                case ConsoleKey.Spacebar:
+                    return cur_f.TryRotate();
             }
+            return Result.SUCCESS;
         }
 
     }

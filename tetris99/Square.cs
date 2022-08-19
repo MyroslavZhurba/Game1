@@ -16,9 +16,9 @@ namespace tetris99
             Draw();
         }
 
-        public override void Rotate()
+        public override void Rotate(Point[] pList)
         {
-           
+
         }
 
     }
