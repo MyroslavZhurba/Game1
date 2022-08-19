@@ -9,10 +9,11 @@ namespace tetris99
         
         public Stick(int x, int y , char sym)
         {
-            for(int i = 0; i < points.Length; ++i)
+            for(int i = 0; i < Length; ++i)
             {
                 points[i] = new Point(x, y++, sym);
             }
+            Draw();
         }
 
         public override void Rotate()
@@ -29,7 +30,7 @@ namespace tetris99
 
         private void RotateVertical()
         {
-            for (int i = 0; i < points.Length; ++i)
+            for (int i = 0; i < Length; ++i)
             {
                 points[i].x = points[0].x;
                 points[i].y = points[0].y + i;

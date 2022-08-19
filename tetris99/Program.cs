@@ -11,44 +11,50 @@ namespace tetris99
             Console.SetBufferSize(40, 30);
 
             FigureGenerator generator = new FigureGenerator(20,0,'*');
+            Figure cur_f = generator.GetNewFigure();
 
-
-            int steps = 10;
-
-            for(int i = 0; i < 5; ++i)
+            while (true)
             {
-                Figure f = generator.GetNewFigure();
-                for(int j = 0; j < steps; ++j)
+                if (Console.KeyAvailable)
                 {
-                    f.Draw();
-                    Thread.Sleep(500);
-                    f.Hide();
-                    f.Move(Direction.Down);
-                    f.Draw();
-
+                    var key = Console.ReadKey();
+                    HandleKey(cur_f, key);
                 }
             }
-
-           /* foreach(Figure fig  in f)
-            {
-                fig.Draw();
-                Thread.Sleep(500);
-                fig.Hide();
-                fig.Rotate();
-                fig.Draw();
-                fig.Hide();
-                fig.Move(Direction.Left);
-                fig.Draw(); 
-            }*/
+            
             
             Console.ReadLine();
         }
 
-        static void Fall(Figure f)
+        private static void HandleKey(Figure cur_f, ConsoleKeyInfo key)
         {
-
+            switch (key.Key)
+            {
+                case ConsoleKey.LeftArrow:
+                    cur_f.TryMove(Direction.Left);
+                    break;
+                case ConsoleKey.RightArrow:
+                    cur_f.TryMove(Direction.Right);
+                    break;
+                case ConsoleKey.DownArrow:
+                    cur_f.TryMove(Direction.Down);
+                    break;
+            }
         }
 
-       
+        /* static void Fall(out Figure  f, FigureGenerator generator)
+         {
+             f = generator.GetNewFigure();
+             f.Draw();
+             for(int i =0;i<15;++i)
+             {
+                 f.Hide();
+                 f.Move(Direction.Down);
+                 f.Draw();
+                 Thread.Sleep(200);
+             }
+         }*/
+
+
     }
 }
