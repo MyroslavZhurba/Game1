@@ -17,35 +17,38 @@ namespace tetris99
             }
         }
 
-        private Point[] Clone()
-        {
-            var NewPoints = new Point[Length];
-            for (int i = 0; i < Length; ++i)
-            {
-                NewPoints[i] = new Point(points[i]);
-            }
-            return NewPoints;
-        }
-
         internal Result TryMove(Direction dir)
         {
             Hide();
-            var clone = Clone();
-            Move(clone, dir);
+            Move(dir);
+            var result = CheckPos();
 
-            var result = CheckPos(clone);
-            if (result==Result.SUCCESS)
-            {
-                points = clone;
+            if (result!=Result.SUCCESS)
+            { 
+                Move(Reverse(dir));
             }
             
             Draw();
             return result;
         }
 
-        private Result  CheckPos(Point[] pList)
+        private Direction Reverse(Direction dir)
         {
-            foreach (var p in pList)
+            switch (dir)
+            {
+                case Direction.Down:
+                    return Direction.Up;
+                case Direction.Right:
+                    return Direction.Left;
+                case Direction.Left:
+                    return Direction.Right;
+            }
+            return dir;
+        }
+
+        private Result  CheckPos()
+        {
+            foreach (var p in points)
             {
                 if (p.Y >= Field.Height)
                 {
@@ -63,9 +66,18 @@ namespace tetris99
             return Result.SUCCESS;
         }
 
-        public void Move(Point[] pList, Direction dir)
+        internal bool IsOnTop()
         {
-            foreach (var p in pList)
+            if (points[0].Y == 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void Move(Direction dir)
+        {
+            foreach (var p in points)
             {
                 p.Move(dir);
             }
@@ -74,13 +86,12 @@ namespace tetris99
         internal Result TryRotate()
         {
             Hide();
-            var clone = Clone();
-            Rotate(clone);
+            Rotate();
 
-            var result = CheckPos(clone);
+            var result = CheckPos();
             if (result == Result.SUCCESS) 
             {
-                points = clone;
+                Rotate();
             }
             Draw();
 
@@ -95,7 +106,7 @@ namespace tetris99
             }
         }
 
-        public abstract void Rotate(Point[] pList);
+        public abstract void Rotate();
 
     }
 }

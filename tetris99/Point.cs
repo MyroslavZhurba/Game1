@@ -29,7 +29,6 @@ namespace tetris99
             X = p.X;
             Y = p.Y;
             C = p.C;
-
         }
 
         internal void Move(Direction dir)
@@ -44,6 +43,9 @@ namespace tetris99
                     break;
                 case Direction.Right:
                     X++;
+                    break;
+                case Direction.Up:
+                    Y--;
                     break;
            }
         }

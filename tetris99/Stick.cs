@@ -16,15 +16,15 @@ namespace tetris99
             Draw();
         }
 
-        public override void Rotate(Point[] pList)
+        public override void Rotate()
         {
-            if (pList[0].X == points[1].X)
+            if (points[0].X == points[1].X)
             { 
-                RotateHorisontal(pList);
+                RotateHorisontal(points);
             }
             else
             {
-                RotateVertical(pList);
+                RotateVertical(points);
             }
         }
 
