@@ -20,29 +20,29 @@ namespace tetris99
         {
             if (points[0].X == points[1].X)
             { 
-                RotateHorisontal(points);
+                RotateHorisontal();
             }
             else
             {
-                RotateVertical(points);
+                RotateVertical();
             }
         }
 
-        private void RotateVertical(Point[] pList)
+        private void RotateVertical()
         {
             for (int i = 0; i < Length; ++i)
             {
-                pList[i].X = points[0].X;
-                pList[i].Y = points[0].Y + i;
+                points[i].X = points[0].X;
+                points[i].Y = points[0].Y + i;
             }
         }
 
-        private void RotateHorisontal(Point[] pList)
+        private void RotateHorisontal()
         {
             for(int i = 0; i < Length; ++i)
             {
-                pList[i].Y = pList[0].Y;
-                pList[i].X = pList[0].X + i;
+                points[i].Y = points[0].Y;
+                points[i].X = points[0].X + i;
             }
         }
     }
