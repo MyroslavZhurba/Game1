@@ -89,7 +89,7 @@ namespace tetris99
             Rotate();
 
             var result = CheckPos();
-            if (result == Result.SUCCESS) 
+            if (result != Result.SUCCESS) 
             {
                 Rotate();
             }

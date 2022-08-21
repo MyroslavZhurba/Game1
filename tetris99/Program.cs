@@ -34,8 +34,6 @@ namespace tetris99
                 }
                
             }
-                        
-            Console.ReadLine();
         }
 
         private static void ProcessResult(ref Figure  curF, Result result)

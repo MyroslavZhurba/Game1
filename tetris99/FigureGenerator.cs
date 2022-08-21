@@ -20,10 +20,16 @@ namespace tetris99
 
         public Figure GetNewFigure()
         {
-            if (_rand.Next(0, 2) == 0)
-                return new Square(_x, _y, _c);
-            else
-                return new Stick(_x, _y, _c);
+            switch(_rand.Next(0, 3))
+            {
+                case 0:
+                    return new Square(_x, _y, _c);
+                case 1:
+                    return new Stick(_x, _y, _c);
+                case 2:
+                    return new TFigure(_x, _y, _c);
+            }
+            return new TFigure(_x, _y, _c);
         }
 
     }
