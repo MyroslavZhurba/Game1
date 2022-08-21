@@ -20,7 +20,7 @@ namespace tetris99
 
         public Figure GetNewFigure()
         {
-            switch(_rand.Next(0, 3))
+            switch(_rand.Next(0, 4))
             {
                 case 0:
                     return new Square(_x, _y, _c);
@@ -29,7 +29,7 @@ namespace tetris99
                 case 2:
                     return new TFigure(_x, _y, _c);
             }
-            return new TFigure(_x, _y, _c);
+            return new LFigure(_x, _y, _c);
         }
 
     }

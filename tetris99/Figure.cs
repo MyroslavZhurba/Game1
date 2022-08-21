@@ -91,7 +91,10 @@ namespace tetris99
             var result = CheckPos();
             if (result != Result.SUCCESS) 
             {
-                Rotate();
+                for(int i = 0; i < 3; ++i)
+                {
+                    Rotate();
+                }
             }
             Draw();
 
@@ -108,5 +111,6 @@ namespace tetris99
 
         public abstract void Rotate();
 
+        
     }
 }
