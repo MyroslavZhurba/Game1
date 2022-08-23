@@ -1,2 +1,2 @@
-# Game1
-Tetris
+# Tetris
+Console Game
