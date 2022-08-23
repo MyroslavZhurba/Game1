@@ -26,8 +26,12 @@ namespace tetris99
             if (result!=Result.SUCCESS)
             { 
                 Move(Reverse(dir));
+                if (dir==Direction.Left || dir == Direction.Right)
+                {
+                    result = Result.BORDER_STOP;
+                }
             }
-            
+
             Draw();
             return result;
         }
@@ -38,15 +42,17 @@ namespace tetris99
             {
                 case Direction.Down:
                     return Direction.Up;
+
                 case Direction.Right:
                     return Direction.Left;
+
                 case Direction.Left:
                     return Direction.Right;
             }
             return dir;
         }
 
-        private Result  CheckPos()
+        private Result CheckPos()
         {
             foreach (var p in points)
             {
@@ -95,9 +101,14 @@ namespace tetris99
                 {
                     Rotate();
                 }
-            }
-            Draw();
 
+                if (result == Result.HEAP_STOP)
+                {
+                    result = Result.BORDER_STOP;
+                }
+            }
+
+            Draw();
             return result;
         }
 
@@ -111,6 +122,5 @@ namespace tetris99
 
         public abstract void Rotate();
 
-        
     }
 }

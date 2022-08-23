@@ -9,6 +9,7 @@ namespace tetris99
         static FigureGenerator generator;
         static System.Timers.Timer timer;
         static Figure curF;
+
         static private Object _lockObject = new object();
         const int TIMER_INTERWAL=500;
 
@@ -42,15 +43,17 @@ namespace tetris99
            {
                 Field.AddFigure(curF);
                 Field.CheckLines();
+
                 if (curF.IsOnTop())
                 {
                     WriteGameOver();
                     timer.Elapsed -= OnTimedEvent;
                     return;
                 }
+
                 curF = generator.GetNewFigure();
            }
-          
+
         }
 
         private static void WriteGameOver()
@@ -65,10 +68,13 @@ namespace tetris99
             {
                 case ConsoleKey.LeftArrow:
                     return curF.TryMove(Direction.Left);
+
                 case ConsoleKey.RightArrow:
                     return curF.TryMove(Direction.Right);
+
                 case ConsoleKey.DownArrow:
                     return curF.TryMove(Direction.Down);
+
                 case ConsoleKey.Spacebar:
                     return curF.TryRotate();
             }
@@ -77,9 +83,9 @@ namespace tetris99
 
         private static void SetTimer()
         {
-            
             timer = new System.Timers.Timer(TIMER_INTERWAL); 
             timer.Elapsed += OnTimedEvent;
+
             timer.AutoReset = true;
             timer.Enabled = true;
         }
@@ -88,6 +94,7 @@ namespace tetris99
         {
             Monitor.Enter(_lockObject);
             var result = curF.TryMove(Direction.Down);
+
             ProcessResult(ref curF, result);
             Monitor.Exit(_lockObject);
         }

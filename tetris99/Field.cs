@@ -7,10 +7,10 @@ namespace tetris99
 { 
     static class Field
     {
-        private static int _width = 40;
-        private static int _height = 30;
+        private static int _width = 20;
+        private static int _height = 15;
         private static bool[,] _heap = new bool[Height, Width];
-
+        
         public static int Width
         {
             get
@@ -59,15 +59,43 @@ namespace tetris99
                 if (full)
                 {
                     DeleteLine(i);
+                    DropLines(i);
+
                     Redraw();
                     CheckLines();
                     break;
                 }
             }
-            
         }
 
-        
+        private static void DropLines(int line)
+        {
+            for(int j = 0; j < Field.Width; ++j)
+            {
+                int curSpace = LowestSpace(j, line + 1);
+
+                for(int i = line; i >= 0; i--)
+                {
+                    if (!_heap[i, j])
+                    {
+                        continue;
+                    }
+
+                    _heap[i, j] = false;
+                    _heap[curSpace, j] = true;
+                    curSpace--;
+                }
+            }
+        }
+
+        private static int LowestSpace(int x, int y)
+        {
+            while(y<Field.Height && !_heap[y, x])
+            {
+                y++;
+            }
+            return y - 1;
+        }
 
         private static void Redraw()
         {
@@ -89,17 +117,17 @@ namespace tetris99
 
         private static void DeleteLine(int line)
         {
-            for(int i = line; i >= 0; i--)
+            for (int i = line; i >= 0; i--)
             {
-                for(int j = 0; j < Width; ++j)
+                for (int j = 0; j < Width; ++j)
                 {
-                    if (i==0)
+                    if (i == 0)
                     {
-                        _heap[i,j] = false;
+                        _heap[i, j] = false;
                     }
                     else
                     {
-                        _heap[i, j] = _heap[i-1, j];
+                        _heap[i, j] = _heap[i - 1, j];
                     }
                 }
             }
@@ -110,7 +138,6 @@ namespace tetris99
              foreach (var p in curF.points)
              {
                 _heap[p.Y, p.X] = true;
-             
              }
         }
     }

@@ -24,10 +24,13 @@ namespace tetris99
             {
                 case 0:
                     return new Square(_x, _y, _c);
+
                 case 1:
                     return new Stick(_x, _y, _c);
+
                 case 2:
                     return new TFigure(_x, _y, _c);
+
                 case 3:
                     return new LFigure(_x, _y, _c);
             }

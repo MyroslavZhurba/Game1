@@ -12,6 +12,7 @@ namespace tetris99
             points[1] = new Point(x, y + 1, sym);
             points[2] = new Point(x, y + 2, sym);
             points[3] = new Point(x + 1, y + 2, sym);
+
             Draw();
         }
 
@@ -27,12 +28,15 @@ namespace tetris99
                 case Direction.Right:
                     RotateRight();
                     break;
+
                 case Direction.Left:
                     RotateLeft();
                     break;
+
                 case Direction.Up:
                     RotateUp();
                     break;
+
                 case Direction.Down:
                     RotateDown();
                     break;
@@ -43,6 +47,7 @@ namespace tetris99
         {
             points[0].X = points[1].X + 1;
             points[0].Y = points[1].Y;
+
             points[3].X = points[2].X;
             points[3].Y = points[2].Y + 1;
         }
@@ -51,6 +56,7 @@ namespace tetris99
         {
             points[0].X = points[3].X;
             points[0].Y = points[3].Y + 1;
+
             points[3].X = points[2].X - 1;
             points[3].Y = points[2].Y;
         }       
@@ -59,6 +65,7 @@ namespace tetris99
         {
             points[0].X = points[3].X - 1;
             points[0].Y = points[3].Y;
+
             points[3].X = points[2].X;
             points[3].Y = points[2].Y - 1;
         }
@@ -67,6 +74,7 @@ namespace tetris99
         {
             points[0].X = points[3].X;
             points[0].Y = points[3].Y - 1;
+
             points[3].X = points[2].X + 1;
             points[3].Y = points[2].Y;
         }
