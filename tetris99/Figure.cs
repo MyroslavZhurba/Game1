@@ -13,7 +13,7 @@ namespace tetris99
         {
             foreach (Point p in points)
             {
-                p.Draw();
+                Drawer.DrawPoint(p.Y, p.X);
             }
         }
 
@@ -116,7 +116,7 @@ namespace tetris99
         {
             foreach(Point p in points)
             {
-                p.Hide();
+                Drawer.HidePoint(p.Y,p.X);
             }
         }
 

@@ -10,25 +10,11 @@ namespace tetris99
         public int Y { get; set; }
         public char C { get; set; }
 
-        public void Draw()
-        {
-            Console.SetCursorPosition(X, Y);
-            Console.Write(C);
-            Console.SetCursorPosition(0, 0);
-        }
-
         public Point(int a, int b, char sym)
         {
             X = a;
             Y = b;
             C = sym;
-        }
-
-        public Point(Point p)
-        {
-            X = p.X;
-            Y = p.Y;
-            C = p.C;
         }
 
         internal void Move(Direction dir)
@@ -51,14 +37,6 @@ namespace tetris99
                     Y--;
                     break;
            }
-        }
-
-        internal void Hide()
-        {
-            Console.SetCursorPosition(X, Y);
-            Console.Write(" ");
-        }
-
-        
+        }        
     }
 }

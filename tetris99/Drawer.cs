@@ -2,7 +2,7 @@
 
 namespace tetris99
 {
-    internal class Drawer
+    static class Drawer
     {
         public const char DEF_SYM = '*';
 
